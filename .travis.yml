@@ -1,5 +1,10 @@
 language: go
-sudo: false
+sudo: required
+
+services:
+  - docker
+env:
+  DOCKER_COMPOSE_VERSION: 1.14.0-rc1
 
 branches:
   only:
@@ -11,5 +16,18 @@ go:
   - 1.7.5
   - 1.8
 
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-engine
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
 script:
   - go build
+  - docker-compose build
+  - docker-compose up -d
+  - "curl -X POST -d '{\"url\": \"http://google.com/\"}' http://localhost:8080/shorten"
+  - "curl -X GET http://localhost:8080/url/1"
+  - docker-compose stop
