@@ -24,5 +24,6 @@ before_install:
 
 script:
   - go build
+  - docker-compose --version
   - docker-compose build
   - docker-compose up
