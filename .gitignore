@@ -12,6 +12,8 @@
 *.dylib
 go-url-shortener
 
+/vendor/
+
 # Test binary, build with `go test -c`
 *.test
 
