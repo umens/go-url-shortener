@@ -23,7 +23,7 @@ var redisStorage = redis.NewClient(&redis.Options{
 
 // Link to be stored
 type Link struct {
-	ID  int64
+	ID  int64  `json:"id"`
 	URL string `json:"url"`
 }
 

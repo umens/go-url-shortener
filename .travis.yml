@@ -28,5 +28,5 @@ script:
   - go build
   - docker-compose build
   - docker-compose up -d
-  - "curl -X POST -d '{\'url\': \'http://google.com/\'}" http://localhost:8080/shorten"
+  - "curl -X POST -d '{\"url\": \"http://google.com/\"}' http://localhost:8080/shorten"
   - docker-compose stop
